@@ -22,6 +22,12 @@
                 welcome.style.display = "block"
             }
         }
+
+        function login() {
+            FB.login(function (response) {
+                statusChangeCallback(response);
+            });
+        }
         /* 3. 登入狀態改變時，做出相對應的處理 */
         /* 2. 套件載入完畢後，呼叫 window.fbAsyncInit 函式 */
         window.fbAsyncInit = function () {
@@ -37,7 +43,7 @@
                 statusChangeCallback(response);
             });
         };
-        /* 2. */
+        /* 2. 套件載入完畢後，呼叫 window.fbAsyncInit 函式 */
         /* 1. 載入 FB JavaScript SDK */
         (function (d, s, id) {
             let js, fjs = d.getElementsByTagName(s)[0];
@@ -54,11 +60,12 @@
 <body>
     <h3>Fackbook Login</h3>
     <div id="welcome" style="display:none">
-        <button>Login</button>
+        <button onclick="login();">Login</button>
     </div>
     <div id="main">
         Hello FB
     </div>
+    <!-- 若要做成 登入頁面/會員頁面 則上述 script 需在兩個頁面都做 -->
 </body>
 
 </html>
