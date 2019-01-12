@@ -26,6 +26,8 @@
         function login() {
             FB.login(function (response) {
                 statusChangeCallback(response);
+                // scope: 授權範圍 請參考文件 除了預設授權以外的授權需要人工審查
+                // 先把應用程式 關 off 成為開發者模式
             }, {
                 scope: "email,user_gender"
             });
