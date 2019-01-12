@@ -26,6 +26,8 @@
         function login() {
             FB.login(function (response) {
                 statusChangeCallback(response);
+            }, {
+                scope: "email,user_gender"
             });
         }
         /* 3. 登入狀態改變時，做出相對應的處理 */
