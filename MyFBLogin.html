@@ -17,10 +17,20 @@
             main.style.display = "none";
             if (response.status === 'connected') { // 使用者已登入
                 main.style.display = "block";
-                // testAPI(); // 抓取使用者的資料
+                testAPI(); // 抓取使用者的資料，需經過授權程序
             } else { // 使用者未登入，鼓勵使用者登入
                 welcome.style.display = "block"
             }
+        }
+
+        function testAPI() {
+            // console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function (response) {
+                console.log(response);
+                // console.log('Successful login for: ' + response.name);
+                // document.getElementById('status').innerHTML =
+                //     'Thanks for logging in, ' + response.name + '!';
+            });
         }
 
         function login() {
@@ -28,6 +38,8 @@
                 statusChangeCallback(response);
                 // scope: 授權範圍 請參考文件 除了預設授權以外的授權需要人工審查
                 // 先把應用程式 關 off 成為開發者模式
+                // FB APP Dashboard 角色：可以把朋友或公司同事設定為測試者或開發者身分
+                // 以便協助測試 APP
             }, {
                 scope: "email,user_gender"
             });
