@@ -34,8 +34,9 @@
                 statusChangeCallback(response);
             });
         }
-
+        // 2. 套件載入完成後，呼叫 window.fbAsyncInit 函式
         window.fbAsyncInit = function () {
+            // 初始化 FB SDK 套件
             FB.init({
                 // copy app id from dashboard
                 appId: '796746667340492',
@@ -56,14 +57,16 @@
             //    your app or not.
             //
             // These three cases are handled in the callback function.
-
+            // 偵測使用者的登入狀態
             FB.getLoginStatus(function (response) {
+                console.log(response)
                 statusChangeCallback(response);
             });
 
         };
 
         // Load the SDK asynchronously
+        // 1. 載入 FB JavaScript SDK 匿名函式
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -71,6 +74,7 @@
             js.id = id;
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
+            // 立刻呼叫匿名函示
         }(document, 'script', 'facebook-jssdk'));
 
         // Here we run a very simple test of the Graph API after login is
