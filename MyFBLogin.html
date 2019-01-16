@@ -76,6 +76,12 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         /* 1. 載入 FB JavaScript SDK */
+        function share() {
+            FB.ui({
+                    method: 'share',
+                    href: 'https://developers.facebook.com/docs/',
+            }, function(response){});
+        }
     </script>
 </head>
 
@@ -88,6 +94,7 @@
         Hello FB
     </div>
     <!-- 若要做成 登入頁面/會員頁面 則上述 script 需在兩個頁面都做 -->
+    <button onclick="share();">Share</button>
 </body>
 
 </html>
