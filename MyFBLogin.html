@@ -32,6 +32,7 @@
                 // document.getElementById('status').innerHTML =
                 //     'Thanks for logging in, ' + response.name + '!';
             });
+            // 抓取使用者塗鴉牆上的 Posts
             FB.api("/me/feed", function(response) {
                 console.log(response);
             });
@@ -45,7 +46,7 @@
                 // FB APP Dashboard 角色：可以把朋友或公司同事設定為測試者或開發者身分
                 // 以便協助測試 APP
             }, {
-                scope: "email,user_gender"
+                scope: "email,user_gender,user_posts"
             });
         }
         /* 3. 登入狀態改變時，做出相對應的處理 */
