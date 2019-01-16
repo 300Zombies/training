@@ -76,12 +76,14 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         /* 1. 載入 FB JavaScript SDK */
+        /* share dialog */
         function share() {
             FB.ui({
                     method: 'share',
                     href: 'https://developers.facebook.com/docs/',
             }, function(response){});
         }
+        /* share dialog */
     </script>
 </head>
 
