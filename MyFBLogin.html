@@ -26,7 +26,7 @@
         function testAPI() {
             // console.log('Welcome!  Fetching your information.... ');
             // ?field = info fields
-            FB.api('/me?field=id,name,email,gender,birthday', function (response) {
+            FB.api('/me?fields=id,name,email,gender,birthday', function (response) {
                 console.log(response);
                 // console.log('Successful login for: ' + response.name);
                 // document.getElementById('status').innerHTML =
