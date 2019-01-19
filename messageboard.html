@@ -79,8 +79,12 @@
             ref.once("value", function (snapshots) {
                 let data = [];
                 snapshots.forEach(function (snapshot) {
-                    data.push(snapshot.val());
+                    let message = snapshot.val();
+                    message.key = snapshot.key;
+                    data.push(message);
                 });
+                // 顯示資料
+                console.log(data)
                 show(data);
             });
         }
@@ -92,9 +96,34 @@
             let message;
             for (let i = 0; i < data.lengh; i++) {
                 message = data[i];
-                // 把新的訊息放在上面
-                list.innerHTML = message.name.bold() + " : " + message.content + "<hr>" + list.innerHTML
+                // 如果使用者沒有登入
+                if (currentUser === null) {
+                    // 把新的訊息放在上面
+                    list.innerHTML = message.name.bold() + " : " + message.content + "<hr>" + list.innerHTML
+                } else { // 如果有登入
+                    if (currentUser.uid === message.id) { // 而且登入與留言同一個 id
+                        // 顯示刪除按鈕
+                        list.innerHTML = message.name.bold() + " : " + message.content +
+                            "<button onclick='del()';>Delete</button>" +
+                            "<hr>" + list.innerHTML
+                    } else {
+                        // 把新的訊息放在上面
+                        list.innerHTML = message.name.bold() + " : " + message.content + "<hr>" + list.innerHTML
+                    }
+                }
             }
+        }
+
+        function del() {
+            let ref = db.ref("/messages/???")
+            ref.remove(function (error) {
+                if (error) {
+                    alert(error);
+                } else {
+                    alert("Removed");
+                    read();
+                }
+            })
         }
         // 網頁載入完成後(事件處理)，執行函式
         window.addEventListener("load", function () {
