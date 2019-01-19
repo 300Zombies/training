@@ -9,6 +9,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
     <script>
+        // https://github.com/cwpeng/training
         // Initialize Firebase
         let config = {
             apiKey: "AIzaSyB4DRgFC6a4Yvdsskch3cpyfO8sXaO3zuE",
@@ -25,14 +26,14 @@
         // 當使用者的登入狀態變化的時候，執行我們提供的函式
         let currentUser = null;
         auth.onAuthStateChanged(function (user) {
-            let member = document.getElementById("member");
-            let welcome = document.getElementById("welcome");
+            let member = document.queryselector("#member");
+            let welcome = document.queryselector("#welcome");
             member.style.display = "none";
             welcome.style.display = "none";
             if (user) { // User is signed in.
-                member.style.display = "block";
-                currentUser = user;
                 console.log(user);
+                currentUser = user;
+                member.style.display = "block";
             } else { // User is signed out.
                 console.log(user);
                 currentUser = null;
@@ -84,7 +85,6 @@
                     data.push(message);
                 });
                 // 顯示資料
-                console.log(data)
                 show(data);
             });
         }
@@ -104,7 +104,7 @@
                     if (currentUser.uid === message.id) { // 而且登入與留言同一個 id
                         // 顯示刪除按鈕
                         list.innerHTML = message.name.bold() + " : " + message.content +
-                            "<button onclick='del()';>Delete</button>" +
+                            "<button onclick='del(\"" + message.key + "\")';>Delete</button>" +
                             "<hr>" + list.innerHTML
                     } else {
                         // 把新的訊息放在上面
@@ -114,8 +114,8 @@
             }
         }
 
-        function del() {
-            let ref = db.ref("/messages/???")
+        function del(key) {
+            let ref = db.ref("/messages/" + key)
             ref.remove(function (error) {
                 if (error) {
                     alert(error);
