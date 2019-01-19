@@ -74,6 +74,7 @@
 
         function read() {
             let ref = db.ref("/messages");
+            // 注意 snapshots and snapshot 的差異
             ref.once("value", function (snapshots) {
                 let data = [];
                 snapshots.forEach(function (snapshot) {
@@ -82,10 +83,22 @@
                 console.log(data);
             });
         }
+
+        function show(data) {
+            let list = document.getElementById("list");
+            // 更完整的方法應該要用 creatElement 來取代 innerHTML
+            list.innerHTML = "";
+            let message;
+            for (let i = 0; i < data.lengh; i++) {
+                message = data[i];
+                // 把新的訊息放在上面
+                list.innerHTML = message.name.bold() + " : " + message.content + "<hr>" + list.innerHTML
+            }
+        }
         // 網頁載入完成後(事件處理)，執行函式
         window.addEventListener("load", function () {
             read();
-        })
+        });
     </script>
 </head>
 
