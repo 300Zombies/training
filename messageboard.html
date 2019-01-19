@@ -66,7 +66,7 @@
                 if (error) {
                     alert(error);
                 } else {
-                    document.querySeletor("#content").value = "";
+                    document.querySelector("#content").value = "";
                     read();
                 }
             });
@@ -86,7 +86,7 @@
         }
 
         function show(data) {
-            let list = document.querySeletor("#list");
+            let list = document.querySelector("#list");
             // 更完整的方法應該要用 creatElement 來取代 innerHTML
             list.innerHTML = "";
             let message;
