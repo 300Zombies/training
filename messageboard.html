@@ -85,7 +85,7 @@
         }
 
         function show(data) {
-            let list = document.getElementById("list");
+            let list = document.querySeletor("#list");
             // 更完整的方法應該要用 creatElement 來取代 innerHTML
             list.innerHTML = "";
             let message;
@@ -112,7 +112,7 @@
         <button onclick="post();">Post</button>
     </div>
     <hr>
-    <div id="list">Message Board</div>
+    <div id="list"></div>
 </body>
 
 </html>
