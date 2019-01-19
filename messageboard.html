@@ -26,8 +26,8 @@
         // 當使用者的登入狀態變化的時候，執行我們提供的函式
         let currentUser = null;
         auth.onAuthStateChanged(function (user) {
-            let member = document.queryselector("#member");
-            let welcome = document.queryselector("#welcome");
+            let member = document.querySelector("#member");
+            let welcome = document.querySelector("#welcome");
             member.style.display = "none";
             welcome.style.display = "none";
             if (user) { // User is signed in.
