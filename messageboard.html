@@ -52,6 +52,8 @@
         function post() {
             let id = currentUser.uid;
             let name = currentUser.displayName;
+            // 使用 querySelector 時 id 前面要加 # 字號 => 同 CSS 語法
+            // 可改成 getElementById("id").value
             let content = document.querySelector("#content").value;
             // 加入資料庫
             let ref = db.ref("/messages");
@@ -67,7 +69,23 @@
                     alert("OK");
                 }
             });
+            // post 之後把 textarea 清空，自行用 JS 補上
         }
+
+        function read() {
+            let ref = db.ref("/messages");
+            ref.once("value", function (snapshots) {
+                let data = [];
+                snapshots.forEach(function (snapshot) {
+                    data.push(snapshot.val());
+                });
+                console.log(data);
+            });
+        }
+        // 網頁載入完成後(事件處理)，執行函式
+        window.addEventListener("load", function () {
+            read();
+        })
     </script>
 </head>
 
@@ -77,7 +95,7 @@
         <button onclick="signIn();">Sign In</button>
     </div>
     <div id="member" style="display:none;">
-        <textarea name="" id="content" cols="30" rows="10"></textarea>
+        <textarea name="" id="content" cols="20" rows="5"></textarea>
         <button onclick="post();">Post</button>
     </div>
     <hr>
